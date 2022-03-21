@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
         int opcion, palabras;
-        char letra;
+        char letra, letraOrg, letraChange;
 
         System.out.println("Escribe una frase (intro para terminar):");
         String texto = entrada.nextLine();
@@ -23,6 +23,7 @@ public class Main {
            System.out.println();
            System.out.println("Elige una opción: ");
            opcion = entrada.nextInt();
+           entrada.nextLine();
 
            switch (opcion) {
                case 1:
@@ -36,20 +37,40 @@ public class Main {
                    break;
                case 2:
                    letra = ' ';
-                   for (int i = 0; i < texto.length(); i++) {
+                   System.out.print("Las iniciales son: " + texto.toUpperCase().charAt(0));
+                   for (int i = 1; i < texto.length(); i++) {
                        if (texto.charAt(i) == ' ') {
-                           // no va xd.
-                           letra = texto.charAt(' ' + i);
+                           letra = texto.toUpperCase().charAt(i + 1);
+                           System.out.print(letra);
                        }
                    }
-                   System.out.println("Las iniciales son: " + letra);
+                   System.out.println();
+                   break;
+               case 3:
+                   System.out.print("¿Qué caracter quieres cambiar?: ");
+                   letraOrg = entrada.nextLine().charAt(0);
+                   System.out.print("¿Porqué caracter lo quieres cambiar?: ");
+                   letraChange = entrada.nextLine().charAt(0);
+                   for (int i = 0; i < texto.length(); i++) {
+                       if (letraOrg == texto.charAt(i)) {
+                           System.out.print(letraChange);
+                       } else {
+                           System.out.print(texto.charAt(i));
+                       }
+                   }
+                   System.out.println();
+                   break;
+               case 4:
+                   for (int i = texto.length() - 1; i >= 0; i--) {
+                       System.out.print(texto.charAt(i));
+                   }
+                   System.out.println();
                    break;
                case 0:
                    System.out.println("¡HASTA PRONTO!");
                    break;
            }
 
-           entrada.nextLine();
            System.out.println("Intro para continuar...");
            entrada.nextLine();
    } while (opcion != 0);
